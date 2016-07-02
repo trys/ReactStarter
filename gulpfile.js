@@ -11,6 +11,7 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var gutil = require('gulp-util');
 var babelify = require('babelify');
+var browserSync = require('browser-sync').create();
  
 // External dependencies you do not want to rebundle while developing,
 // but include in your application deployment
@@ -34,12 +35,24 @@ gulp.task('deploy', function (){
  
 gulp.task('watch', function () {
 	gulp.watch(['./app/**/*.js'], ['scripts']);
+
+	gulp.watch(['./build/**/*.js'], function() {
+		browserSync.reload();
+	});
 });
+
+gulp.task('browser-sync', function() {
+	browserSync.init({
+		open: false,
+		proxy: 'react-starter.dev'
+	});
+});
+
  
 // When running 'gulp' on the terminal this task will fire.
 // It will start watching for changes in every .js file.
 // If there's a change, the task 'scripts' defined above will fire.
-gulp.task('default', ['scripts','watch']);
+gulp.task('default', ['browser-sync', 'scripts','watch']);
  
 // Private Functions
 // ----------------------------------------------------------------------------
