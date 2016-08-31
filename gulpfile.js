@@ -12,6 +12,7 @@ var source = require('vinyl-source-stream');
 var gutil = require('gulp-util');
 var babelify = require('babelify');
 var browserSync = require('browser-sync').create();
+var historyApiFallback = require('connect-history-api-fallback');
  
 // External dependencies you do not want to rebundle while developing,
 // but include in your application deployment
@@ -44,7 +45,10 @@ gulp.task('watch', function () {
 gulp.task('browser-sync', function() {
 	browserSync.init({
 		open: false,
-		proxy: 'react-starter.dev'
+		server: {
+			baseDir: './',
+			middleware: [ historyApiFallback() ]
+		}
 	});
 });
 

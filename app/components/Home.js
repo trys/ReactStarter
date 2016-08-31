@@ -5,8 +5,8 @@ var Home = React.createClass({
   render: function() {
     return (
       <div className="app-wrapper">
-        <h1>Home</h1>
         <HeaderArea />
+        <h1>Homes!5</h1>
       </div>
     );
   }

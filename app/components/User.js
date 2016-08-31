@@ -10,7 +10,12 @@ var User = React.createClass({
   },
 
   componentDidMount: function() {
-    fetch('../../data/drivers.json')
+    fetch('../../data/drivers.json', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    })
       .then(response => response.json())
       .then(body => {
         var users = body.MRData.DriverTable.Drivers;
